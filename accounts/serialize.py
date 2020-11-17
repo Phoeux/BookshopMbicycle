@@ -5,7 +5,7 @@ from rest_framework.serializers import ModelSerializer
 User = get_user_model()
 
 
-class UserSerializer1(ModelSerializer):
+class UserSerializer(ModelSerializer):
     user = None
 
     class Meta:
@@ -17,7 +17,7 @@ class UserSerializer1(ModelSerializer):
         return self.user
 
 
-class LoginSerializer1(serializers.ModelSerializer):
+class LoginSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
         max_length=65, min_length=8, write_only=True)
     email = serializers.CharField(max_length=255, min_length=2)
