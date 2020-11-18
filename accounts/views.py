@@ -18,9 +18,8 @@ class RegisterView(GenericAPIView):
             serializer.save()
 
             if serializer.user is not None:
-                send_email_task.delay(5, serializer)
-            #     send_mail('helo lalka', f'{serializer.user.password}', 'lobinsky.gleb@gmail.com', [serializer.user.email],
-            #               fail_silently=False)
+                print(serializer.data)
+                send_email_task.delay(5, serializer.data, request.data['password'])
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
