@@ -25,6 +25,7 @@ class Author(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=50)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    buyers = models.ManyToManyField(User, blank=True, related_name='bought_books')
 
     def __str__(self):
         return self.title

@@ -149,17 +149,17 @@ STATIC_URL = '/static/'
 # AUTH_USER_MODEL = 'accounts.User'
 AUTHENTICATION_BACKENDS = ['accounts.backends.EmailBackend']
 
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": "redis://redis://127.0.0.1:6379/1",
-#     }
-# }
-#
-# CELERY_BROKER_URL = 'redis://redis:6379'
-# CELERY_RESULT_BACKEND = 'redis://redis:6379'
-# CELERY_ACCEPT_CONTENT = ['json']
-# CELERY_TASK_SERIALIZER = 'json'
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis://127.0.0.1:6379/1",
+    }
+}
+
+CELERY_BROKER_URL = 'redis://redis:6379'
+CELERY_RESULT_BACKEND = 'redis://redis:6379'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
 
 # CELERY_BROKER_URL = 'redis://:p859d7c846a1a816f569ad31d61409022891787d68b47f807ef2a267aee29d73b@ec2-54-155-193-34.eu-west-1.compute.amazonaws.com:27879'
 #
@@ -167,7 +167,7 @@ AUTHENTICATION_BACKENDS = ['accounts.backends.EmailBackend']
 # CELERY_TASK_SERIALIZER = 'json'
 
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST_USER = "lobinsky.gleb@gmail.com"
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

@@ -1,6 +1,7 @@
 from django.contrib import auth
 from django.core.mail import send_mail
 from rest_framework import status
+from rest_framework.authtoken.models import Token
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 # from authentication.serializer import UserSerializer, LoginSerializer
@@ -18,9 +19,9 @@ class RegisterView(GenericAPIView):
             serializer.save()
 
             if serializer.user is not None:
-                print(serializer.data)
+                token = Token.objects.create(user=serializer.user)
                 send_email_task.delay(5, serializer.data, request.data['password'])
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(f'{token.key}', status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
