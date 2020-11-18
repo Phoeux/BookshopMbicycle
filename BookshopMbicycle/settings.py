@@ -79,25 +79,27 @@ WSGI_APPLICATION = 'BookshopMbicycle.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': environ.get("POSTGRES_DB"),
-        'USER': environ.get("POSTGRES_USER"),
-        'PASSWORD': environ.get("POSTGRES_PASSWORD"),
-        'PORT': 5432,
-        'HOST': "db1"
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': environ.get("POSTGRES_DB"),
+#         'USER': environ.get("POSTGRES_USER"),
+#         'PASSWORD': environ.get("POSTGRES_PASSWORD"),
+#         'PORT': 5432,
+#         'HOST': "db1"
+#     }
+# }
+
 REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+        'PAGE_SIZE': 1,
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
@@ -145,17 +147,17 @@ STATIC_URL = '/static/'
 # AUTH_USER_MODEL = 'accounts.User'
 AUTHENTICATION_BACKENDS = ['accounts.backends.EmailBackend']
 
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://redis://127.0.0.1:6379/1",
-    }
-}
-
-CELERY_BROKER_URL = 'redis://redis:6379'
-CELERY_RESULT_BACKEND = 'redis://redis:6379'
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://redis://127.0.0.1:6379/1",
+#     }
+# }
+#
+# CELERY_BROKER_URL = 'redis://redis:6379'
+# CELERY_RESULT_BACKEND = 'redis://redis:6379'
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
 
 # CELERY_BROKER_URL = 'redis://:p859d7c846a1a816f569ad31d61409022891787d68b47f807ef2a267aee29d73b@ec2-54-155-193-34.eu-west-1.compute.amazonaws.com:27879'
 #
