@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import MultipleObjectsReturned
 from django.db.models import Q
 
-
 User = get_user_model()
 
 

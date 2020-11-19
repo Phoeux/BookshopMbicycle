@@ -1,5 +1,4 @@
 from rest_framework.serializers import ModelSerializer
-
 from managebook.models import User, Book, Author
 
 
