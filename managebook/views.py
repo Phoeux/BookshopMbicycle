@@ -39,7 +39,7 @@ class StatAll(APIView):
     def get(self, request):
         count = Book.objects.aggregate(count=Sum('count'))['count']
         query = Author.objects.all()
-        data = {a.name: a.count / count * 100 for a in query}
+        data = {a.name: f'{a.count / count * 100}%' for a in query}
         data['total'] = count
         return Response(data)
 
