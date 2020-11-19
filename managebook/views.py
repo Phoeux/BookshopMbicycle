@@ -45,13 +45,20 @@ class BoughtBooks(APIView):
         return Response(request.user.users_books.aggregate(Sum('count')))
 
 
-class StatUser(APIView):
-    pass
-
-
-class StatBooks(APIView):
-    pass
+class StatAll(APIView):
+    def get(self, request):
+        count = Book.objects.aggregate(count=Sum('count'))['count']
+        query = Author.objects.all()
+        data = {a.name: a.count / count * 100 for a in query}
+        data['total'] = count
+        return Response(data)
 
 
 class DumpBooks(APIView):
     pass
+
+
+class MonthlySoldBooks(APIView):
+    def get(self, request):
+        monthlycount = Book.objects
+        pass

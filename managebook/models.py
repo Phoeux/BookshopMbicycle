@@ -17,6 +17,7 @@ class User(AbstractUser):
 
 class Author(models.Model):
     name = models.CharField(max_length=50)
+    count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.name
@@ -24,10 +25,10 @@ class Author(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=50)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='authors_books')
     buyers = models.ManyToManyField(User, through='managebook.SoldBooks', blank=True, related_name='bought_books')
+    count = models.PositiveIntegerField(default=0)
 
-    
     def __str__(self):
         return self.title
 
@@ -36,3 +37,12 @@ class SoldBooks(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='users_books')
     book = models.ForeignKey(Book, on_delete=models.DO_NOTHING, related_name='books_users')
     count = models.PositiveIntegerField(default=1)
+    date = models.DateField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        self.book.author.count += int(self.count)
+        self.book.author.save()
+        self.book.count += int(self.count)
+        self.book.save()
+        super().save(*args, **kwargs)
+
