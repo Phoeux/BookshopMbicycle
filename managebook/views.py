@@ -4,7 +4,7 @@ from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from managebook.models import Book, Author, SoldBooks, User
-from managebook.serializer import BookSerializer, AuthorSerializer
+from managebook.serializer import BookSerializer, AuthorSerializer, CreateBookSerializer
 from rest_framework.views import APIView
 from rest_framework.authentication import TokenAuthentication
 
@@ -17,11 +17,13 @@ class ListBook(ListAPIView):
 
 class CreateBook(CreateAPIView):
     permission_classes = (IsAuthenticated,)
-    serializer_class = BookSerializer
+    authentication_classes = (TokenAuthentication,)
+    serializer_class = CreateBookSerializer
 
 
 class ListAuthors(ListAPIView):
     serializer_class = AuthorSerializer
+
     queryset = Author.objects.all()
 
 

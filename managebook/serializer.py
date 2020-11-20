@@ -18,3 +18,8 @@ class AuthorSerializer(ModelSerializer):
     class Meta:
         model = Author
         fields = '__all__'
+
+class CreateBookSerializer(ModelSerializer):
+    class Meta:
+        model = Book
+        fields = ['title', 'author']
