@@ -23,7 +23,6 @@ class CreateBook(CreateAPIView):
 
 class ListAuthors(ListAPIView):
     serializer_class = AuthorSerializer
-
     queryset = Author.objects.all()
 
 
